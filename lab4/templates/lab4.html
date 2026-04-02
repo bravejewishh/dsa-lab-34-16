@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if page == 'index' %}лабораторная работа №5
+        {% elif page == 'login' %}вход в систему
+        {% elif page == 'signup' %}регистрация
+        {% endif %}
+    </title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #555; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0056b3; }
+        .message { padding: 10px; margin-bottom: 15px; border-radius: 4px; }
+        .error { background: #ffe6e6; color: #cc0000; }
+        .success { background: #e6ffe6; color: #006600; }
+        .links { text-align: center; margin-top: 15px; }
+        .links a { color: #007bff; text-decoration: none; }
+        .links a:hover { text-decoration: underline; }
+        .logout-btn { background: #dc3545; margin-top: 20px; }
+        .logout-btn:hover { background: #c82333; }
+        .user-info { text-align: center; margin-bottom: 20px; color: #555; background: #e3f2fd; padding: 15px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if page == 'index' %}
+            <h1>разработка программных приложений</h1>
+            <p style="text-align: center; color: #666;">лабораторная работа №5: механизмы аутентификации и авторизации на flask</p>
+            <div class="user-info">
+                <p>вы вошли как: <strong>{{ user.name }}</strong><br>
+                email: {{ user.email }}</p>
+            </div>
+            <form method="get" action="{{ url_for('logout') }}">
+                <button type="submit" class="logout-btn">выход</button>
+            </form>
+            
+        {% elif page == 'login' %}
+            <h1>вход в систему</h1>
+            <form method="post" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="email">email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">пароль *</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">вход</button>
+            </form>
+            <div class="links">
+                <p>нет аккаунта? <a href="{{ url_for('signup') }}">зарегистрироваться</a></p>
+            </div>
+            
+        {% elif page == 'signup' %}
+            <h1>регистрация</h1>
+            <form method="post" action="{{ url_for('signup') }}">
+                <div class="form-group">
+                    <label for="name">имя *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">пароль *</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">зарегистрироваться</button>
+            </form>
+            <div class="links">
+                <p>уже есть аккаунт? <a href="{{ url_for('login') }}">войти</a></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
