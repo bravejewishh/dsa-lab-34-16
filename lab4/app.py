@@ -11,11 +11,11 @@ app.secret_key = 'your_secret_key_here'
 user_db = "postgres"
 host_ip = "127.0.0.1"
 host_port = "5432"
-database_name = "lab5"
+database_name = "lab4"
 password = "postgres"
 
 encoded_password = quote_plus(password)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+pg8000://{user_db}:{encoded_password}@{host_ip}:{host_port}/{database_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{user_db}:{encoded_password}@{host_ip}:{host_port}/{database_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -62,17 +62,17 @@ def login_post():
     
     if not email or not password_input:
         flash('все поля обязательны для заполнения', 'error')
-        return redirect(url_for('login'))  # ✅ ИСПРАВЛЕНО: было login_post
+        return redirect(url_for('login'))  
     
     user = User.query.filter_by(email=email).first()
     
     if not user:
         flash('пользователь с таким email не найден', 'error')
-        return redirect(url_for('login'))  # ✅ ИСПРАВЛЕНО: было login_post
+        return redirect(url_for('login'))  
     
     if not check_password_hash(user.password, password_input):
         flash('неверный пароль', 'error')
-        return redirect(url_for('login'))  # ✅ ИСПРАВЛЕНО: было login_post
+        return redirect(url_for('login')) 
     
     login_user(user)
     return redirect(url_for('index'))
@@ -93,12 +93,12 @@ def signup_post():
     
     if not name or not email or not password_input:
         flash('все поля обязательны для заполнения', 'error')
-        return redirect(url_for('signup'))  # ✅ ИСПРАВЛЕНО: было signup_post
+        return redirect(url_for('signup'))  
     
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
         flash('пользователь с таким email уже существует', 'error')
-        return redirect(url_for('signup'))  # ✅ ИСПРАВЛЕНО: было signup_post
+        return redirect(url_for('signup')) 
     
     hashed_password = generate_password_hash(password_input, method='pbkdf2:sha256')
     new_user = User(email=email, password=hashed_password, name=name)
