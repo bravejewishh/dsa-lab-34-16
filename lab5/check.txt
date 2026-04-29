@@ -1,0 +1,17 @@
+позитивные тесты:
+1. равносторонний: (3, 3, 3) -> "equilateral"
+2. равнобедренный: (5, 5, 3) -> "isosceles"
+3. равнобедренный: (5, 3, 5) -> "isosceles"
+4. равнобедренный: (3, 5, 5) -> "isosceles"
+5. разносторонний: (3, 4, 5) -> "nonequilateral"
+6. разносторонний: (7, 8, 9) -> "nonequilateral"
+7. дробные значения: (2.5, 2.5, 3.0) -> "isosceles"
+
+негативные тесты:
+1. отрицательная сторона: (-1, 2, 3) -> IncorrectTriangleSides
+2. нулевая сторона: (0, 2, 3) -> IncorrectTriangleSides
+3. нарушено неравенство: (1, 2, 10) -> IncorrectTriangleSides
+4. сумма двух равна третьей: (1, 2, 3) -> IncorrectTriangleSides
+5. нечисловые значения: ("a", 2, 3) -> IncorrectTriangleSides
+6. None в аргументах: (None, 2, 3) -> IncorrectTriangleSides
+7. недостаточно аргументов: вызов с 2 аргументами -> TypeError
