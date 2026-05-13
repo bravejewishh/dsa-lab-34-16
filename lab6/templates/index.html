@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление курсами валют</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .menu { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .card { border: 1px solid #ccc; padding: 20px; border-radius: 8px; width: 200px; text-align: center; }
+        .card a { text-decoration: none; font-size: 18px; color: #007bff; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Микросервис управления курсами валют</h1>
+    <div class="menu">
+        <div class="card"><a href="/list">Список валют</a></div>
+        <div class="card"><a href="/add_currency">Добавить валюту</a></div>
+        <div class="card"><a href="/update_currency">Обновить курс</a></div>
+        <div class="card"><a href="/delete_currency">Удалить валюту</a></div>
+        <div class="card"><a href="/convert_form">Конвертация</a></div>
+    </div>
+</body>
+</html>

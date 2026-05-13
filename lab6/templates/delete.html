@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить валюту</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { width: 120px; display: inline-block; }
+        input { padding: 5px; width: 200px; }
+        button { padding: 8px 20px; background-color: #dc3545; color: white; border: none; cursor: pointer; }
+        .success { background-color: #d4edda; color: #155724; padding: 10px; margin-top: 20px; }
+        .error { background-color: #f8d7da; color: #721c24; padding: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Удаление валюты</h2>
+    <form id="deleteForm">
+        <div class="form-group">
+            <label>Код валюты:</label>
+            <input type="text" id="currency_name" placeholder="USD" required>
+        </div>
+        <button type="submit">Удалить</button>
+    </form>
+    <div id="message"></div>
+    <a href="/">← На главную</a>
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const currency_name = document.getElementById('currency_name').value.toUpperCase();
+            if (!confirm(`Удалить ${currency_name}?`)) return;
+            const resp = await fetch('/api/delete', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({currency_name})
+            });
+            const result = await resp.json();
+            const msgDiv = document.getElementById('message');
+            if (resp.ok) {
+                msgDiv.innerHTML = `<div class="success">${result.message}</div>`;
+                document.getElementById('deleteForm').reset();
+            } else {
+                msgDiv.innerHTML = `<div class="error">${result.error}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>

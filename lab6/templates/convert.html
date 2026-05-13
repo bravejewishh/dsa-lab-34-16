@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Конвертация</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { width: 120px; display: inline-block; }
+        input { padding: 5px; width: 200px; }
+        button { padding: 8px 20px; background-color: #17a2b8; color: white; border: none; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 4px; }
+        .result-value { font-size: 24px; font-weight: bold; color: #28a745; }
+        .error { background-color: #f8d7da; color: #721c24; padding: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Конвертация в рубли</h2>
+    <form id="convertForm">
+        <div class="form-group">
+            <label>Код валюты:</label>
+            <input type="text" id="currency_name" placeholder="USD" required>
+        </div>
+        <div class="form-group">
+            <label>Сумма:</label>
+            <input type="number" id="amount" step="any" required>
+        </div>
+        <button type="submit">Конвертировать</button>
+    </form>
+    <div id="result"></div>
+    <a href="/">← На главную</a>
+    <script>
+        document.getElementById('convertForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const currency_name = document.getElementById('currency_name').value.toUpperCase();
+            const amount = parseFloat(document.getElementById('amount').value);
+            const resp = await fetch(`/api/convert?currency_name=${currency_name}&amount=${amount}`);
+            const result = await resp.json();
+            const resultDiv = document.getElementById('result');
+            if (resp.ok) {
+                resultDiv.innerHTML = `<div class="result">
+                    ${result.amount} ${result.currency_name} → 
+                    <span class="result-value">${result.result.toFixed(2)} рублей</span><br>
+                    <small>Курс: ${result.rate.toFixed(4)} ₽</small>
+                </div>`;
+            } else {
+                resultDiv.innerHTML = `<div class="error">${result.error}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>

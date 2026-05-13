@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список валют</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Список валют</h2>
+    {% if currencies %}
+    <table>
+        <tr><th>ID</th><th>Валюта</th><th>Курс (RUB)</th></tr>
+        {% for c in currencies %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.currency_name }}</td>
+            <td>{{ "%.4f"|format(c.rate) }} ₽</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Нет доступных валют.</p>
+    {% endif %}
+    <a href="/">← На главную</a>
+</body>
+</html>
