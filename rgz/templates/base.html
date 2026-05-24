@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовый учет</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>Финансовый учет</h1>
+            <div class="header-buttons">
+                {% if session.get('user_id') %}
+                    <a href="{{ url_for('add_operation') }}" class="header-btn register">Добавить операцию</a>
+                    <a href="{{ url_for('view_operations') }}" class="header-btn register">Операции</a>
+                    <a href="{{ url_for('delete_account') }}" class="header-btn login">Удалить аккаунт</a>
+                    <a href="{{ url_for('logout') }}" class="header-btn login">Выход</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="header-btn register">Регистрация</a>
+                    <a href="{{ url_for('login') }}" class="header-btn login">Вход</a>
+                {% endif %}
+            </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,230 @@
+/* static/style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9 0%, #fce4ec 100%);
+    min-height: 100vh;
+    color: #4a4a4a;
+    line-height: 1.6;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+/* Шапка: заголовок и кнопки */
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.app-header h1 {
+    font-size: 2.2rem;
+    color: #d4748c; /* Розовый заголовок */
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-btn {
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Кнопка Регистрация - розовый акцент */
+.header-btn.register {
+    color: #c05a70;
+    background: rgba(212, 116, 140, 0.15);
+    border-color: rgba(212, 116, 140, 0.3);
+}
+
+/* Кнопка Войти - сплошной розовый, без градиента */
+.header-btn.login {
+    color: #c05a70;
+    background: rgba(212, 116, 140, 0.15);
+    border-color: rgba(212, 116, 140, 0.3);
+}
+.header-btn.login:hover {
+  transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+
+.header-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Основная карточка (полупрозрачная) */
+.card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.08);
+}
+
+.card h2 {
+    color: #c05a70; /* Розовый подзаголовок */
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
+/* Формы */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+label {
+    font-weight: 500;
+    color: #6a5a5e;
+    font-size: 0.95rem;
+}
+
+input, select {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(212, 116, 140, 0.3);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    color: #333;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #d4748c;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 0 3px rgba(212, 116, 140, 0.15);
+}
+
+/* Кнопки отправки формы */
+button[type="submit"] {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #e895a8 0%, #f5b7c5 100%);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(232, 149, 168, 0.3);
+}
+
+/* Сообщения */
+.flash-messages {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.flash-messages li {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid #e895a8;
+    backdrop-filter: blur(4px);
+    font-size: 0.95rem;
+}
+
+.flash-messages li.success {
+    border-left-color: #81c784;
+    color: #2e5c3a;
+}
+
+.flash-messages li.error {
+    border-left-color: #e57373;
+    color: #7a3a4a;
+}
+
+/* Таблицы */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th {
+    background: rgba(212, 116, 140, 0.15);
+    color: #8c4a5a;
+    padding: 12px;
+    text-align: left;
+    font-weight: 500;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(212, 116, 140, 0.15);
+}
+
+table tr:last-child td { border-bottom: none; }
+table tr:hover td { background: rgba(248, 203, 196, 0.15); }
+
+.income { color: #2e7d32; font-weight: 600; }
+.expense { color: #c62828; font-weight: 600; }
+
+/* Ссылки внутри контента (Розовые) */
+.link-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.link-text a {
+    color: #c05a70; /* Розовый вместо синего */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-text a:hover {
+    text-decoration: underline;
+    color: #a04058;
+}
+
+/* Адаптивность */
+@media (max-width: 500px) {
+    body { padding: 20px 15px; }
+    .app-header h1 { font-size: 1.8rem; }
+    .header-buttons { flex-direction: column; }
+    .card { padding: 20px; }
+    table { font-size: 0.85rem; }
+}

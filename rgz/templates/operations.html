@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Операции{% endblock %}
+{% block content %}
+<h2> Операции ({{ currency }})</h2>
+
+<form method="GET" class="filter-form">
+    <label>Валюта:</label>
+    <select name="currency" onchange="this.form.submit()">
+        <option value="RUB" {% if currency == 'RUB' %}selected{% endif %}>RUB</option>
+        <option value="USD" {% if currency == 'USD' %}selected{% endif %}>USD</option>
+        <option value="EUR" {% if currency == 'EUR' %}selected{% endif %}>EUR</option>
+    </select>
+</form>
+
+{% if operations %}
+<table>
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Тип</th>
+            <th>Сумма (RUB)</th>
+            <th>Сумма ({{ currency }})</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for op in operations %}
+        <tr>
+            <td>{{ op.date }}</td>
+            <td class="{{ op.type }}">{{ '↑ Доход' if op.type == 'income' else '↓ Расход' }}</td>
+            <td class="{{ op.type }}">{{ op.sum_rub }} ₽</td>
+            <td class="{{ op.type }}">{{ op.sum_conv }} {{ currency }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p style="text-align: center; color: #666;">Операций пока нет</p>
+{% endif %}
+{% endblock %}
