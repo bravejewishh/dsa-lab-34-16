@@ -205,7 +205,7 @@ def view_operations():
             result_ops.append({
                 "date": op["date"],
                 "sum_rub": op["sum"],
-                "sum_conv": round(op["sum"] * rate, 2),
+                "sum_conv": round(op["sum"] / rate, 2),
                 "type": op["type"]
             })
 
